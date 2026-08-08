@@ -179,6 +179,9 @@
   .board-row .ratio{ font-family:'JetBrains Mono'; font-size:11.5px; color:var(--text-muted); }
   .board-row.top .rank{ color:var(--accent-coral); }
   .board-empty{ padding:32px 22px; text-align:center; font-size:14px; color:var(--text-muted); }
+  .board-more-row{ display:flex; justify-content:center; margin-top:18px; }
+  .board-more-btn{ padding:11px 20px; font-size:13.5px; }
+  #playerCount{ color:var(--text-light); font-weight:500; }
 
   /* SUPPORT / MONETIZATION */
   .support{ padding:20px 0 96px; }
@@ -346,13 +349,16 @@
     <div class="section-head reveal">
       <div class="kicker">Classement mondial</div>
       <h2>Les meilleurs récolteurs</h2>
-      <p>Le classement se met à jour en direct à chaque partie terminée.</p>
+      <p>Le classement se met à jour en direct à chaque partie terminée. <span id="playerCount"></span></p>
     </div>
     <div class="board-panel reveal">
       <div class="board-row head"><span>Rang</span><span>Joueur</span><span>Score</span></div>
       <div id="boardBody">
         <div class="board-empty" id="boardStatus">Chargement du classement…</div>
       </div>
+    </div>
+    <div class="board-more-row">
+      <button id="loadMoreBtn" class="btn btn-ghost board-more-btn" hidden>Voir 10 de plus</button>
     </div>
   </div>
 </section>
@@ -433,7 +439,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-  import { getFirestore, collection, query, orderBy, limit, getDocs }
+  import { getFirestore, collection, query, orderBy, limit, startAfter, getDocs, getCountFromServer }
     from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -448,40 +454,114 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  const PAGE_SIZE = 10;
+  const CACHE_KEY = 'ar_leaderboard_v1';
+  const CACHE_TTL = 5 * 60 * 1000; // 5 min — avoids re-billing Firestore reads on repeat visits
+
   const boardBody = document.getElementById('boardBody');
   const boardStatus = document.getElementById('boardStatus');
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const playerCount = document.getElementById('playerCount');
 
-  function renderRows(docs){
-    boardBody.innerHTML = '';
-    docs.forEach((docSnap, i) => {
-      const d = docSnap.data();
-      const rank = String(i + 1).padStart(2, '0');
-      const name = d.pseudo || docSnap.id;
-      const score = (typeof d.score === 'number') ? d.score.toLocaleString('fr-FR') : d.score;
-      const ratio = (typeof d.ratio === 'number') ? d.ratio.toFixed(2) + ' pts/s' : '';
-      const row = document.createElement('div');
-      row.className = 'board-row' + (i < 3 ? ' top' : '');
-      row.innerHTML = `<span class="rank">${rank}</span><span>${name}${ratio ? ` <span class="ratio">· ${ratio}</span>` : ''}</span><span class="score">${score}</span>`;
-      boardBody.appendChild(row);
-    });
+  let lastDoc = null;
+  let rankOffset = 0;
+  let totalCount = null;
+
+  function readCache(){
+    try{
+      const raw = sessionStorage.getItem(CACHE_KEY);
+      if(!raw) return null;
+      const data = JSON.parse(raw);
+      if(Date.now() - data.ts > CACHE_TTL) return null;
+      return data;
+    }catch(e){ return null; }
+  }
+  function writeCache(rows, count){
+    try{
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), rows, count }));
+    }catch(e){ /* storage unavailable — fine, just skip caching */ }
+  }
+  function toRow(docSnap){
+    const d = docSnap.data();
+    return { id: docSnap.id, pseudo: d.pseudo || docSnap.id, score: d.score, ratio: d.ratio };
   }
 
-  async function loadLeaderboard(){
+  function showPlayerCount(count){
+    totalCount = count;
+    playerCount.textContent = `· ${count} joueur${count > 1 ? 's' : ''} classé${count > 1 ? 's' : ''}`;
+  }
+
+  function appendRows(rows){
+    if (boardStatus) boardStatus.remove();
+    rows.forEach((r) => {
+      const rank = String(++rankOffset).padStart(2, '0');
+      const score = (typeof r.score === 'number') ? r.score.toLocaleString('fr-FR') : r.score;
+      const ratio = (typeof r.ratio === 'number') ? r.ratio.toFixed(2) + ' pts/s' : '';
+      const row = document.createElement('div');
+      row.className = 'board-row' + (rankOffset <= 3 ? ' top' : '');
+      row.innerHTML = `<span class="rank">${rank}</span><span>${r.pseudo}${ratio ? ` <span class="ratio">· ${ratio}</span>` : ''}</span><span class="score">${score}</span>`;
+      boardBody.appendChild(row);
+    });
+    updateLoadMoreVisibility();
+  }
+
+  function updateLoadMoreVisibility(){
+    const hasMore = totalCount === null ? true : rankOffset < totalCount;
+    loadMoreBtn.hidden = !(hasMore && lastDoc);
+  }
+
+  async function fetchPage(){
+    const q = lastDoc
+      ? query(collection(db, 'scores'), orderBy('ratio', 'desc'), startAfter(lastDoc), limit(PAGE_SIZE))
+      : query(collection(db, 'scores'), orderBy('ratio', 'desc'), limit(PAGE_SIZE));
+    const snap = await getDocs(q);
+    if (!snap.empty) lastDoc = snap.docs[snap.docs.length - 1];
+    else lastDoc = null;
+    return snap.docs.map(toRow);
+  }
+
+  async function loadFirstPage(){
+    const cached = readCache();
+    if (cached){
+      appendRows(cached.rows);
+      if (cached.count !== undefined) showPlayerCount(cached.count);
+      loadMoreBtn.hidden = true; // cached page has no live cursor to continue from
+      return;
+    }
     try{
-      const q = query(collection(db, 'scores'), orderBy('ratio', 'desc'), limit(10));
-      const snap = await getDocs(q);
-      if (snap.empty){
+      const [rows, countSnap] = await Promise.all([
+        fetchPage(),
+        getCountFromServer(collection(db, 'scores')) // 1 read regardless of collection size
+      ]);
+      const count = countSnap.data().count;
+      showPlayerCount(count);
+      if (rows.length === 0){
         boardStatus.textContent = "Aucun score enregistré pour l'instant. Sois le premier !";
         return;
       }
-      renderRows(snap.docs);
+      appendRows(rows);
+      writeCache(rows, count);
     }catch(err){
       console.error('Erreur de chargement du classement Firestore :', err);
       boardStatus.textContent = "Classement momentanément indisponible.";
     }
   }
 
-  loadLeaderboard();
+  loadMoreBtn.addEventListener('click', async () => {
+    loadMoreBtn.disabled = true;
+    loadMoreBtn.textContent = 'Chargement…';
+    try{
+      const rows = await fetchPage();
+      appendRows(rows);
+    }catch(err){
+      console.error('Erreur de pagination du classement :', err);
+    }finally{
+      loadMoreBtn.disabled = false;
+      loadMoreBtn.textContent = 'Voir 10 de plus';
+    }
+  });
+
+  loadFirstPage();
 </script>
 </body>
 </html>
