@@ -349,7 +349,9 @@
     </div>
     <div class="board-panel reveal">
       <div class="board-row head"><span>Rang</span><span>Joueur</span><span>Score</span></div>
-      <div class="board-empty">Le classement s'affichera ici une fois connecté à ta base de scores en ligne.</div>
+      <div id="boardBody">
+        <div class="board-empty" id="boardStatus">Chargement du classement…</div>
+      </div>
     </div>
   </div>
 </section>
@@ -428,5 +430,56 @@
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+  import { getFirestore, collection, query, orderBy, limit, getDocs }
+    from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBaORd9f-NLvsPvRguRm6ymu5dOylKJxhE",
+    authDomain: "multidevsngl.firebaseapp.com",
+    projectId: "multidevsngl",
+    storageBucket: "multidevsngl.firebasestorage.app",
+    messagingSenderId: "504934628186",
+    appId: "1:504934628186:web:7326d4688962c0bc139163"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const boardBody = document.getElementById('boardBody');
+  const boardStatus = document.getElementById('boardStatus');
+
+  function renderRows(docs){
+    boardBody.innerHTML = '';
+    docs.forEach((docSnap, i) => {
+      const d = docSnap.data();
+      const rank = String(i + 1).padStart(2, '0');
+      const name = d.pseudo || docSnap.id;
+      const score = (typeof d.score === 'number') ? d.score.toLocaleString('fr-FR') : d.score;
+      const row = document.createElement('div');
+      row.className = 'board-row' + (i < 3 ? ' top' : '');
+      row.innerHTML = `<span class="rank">${rank}</span><span>${name}</span><span class="score">${score}</span>`;
+      boardBody.appendChild(row);
+    });
+  }
+
+  async function loadLeaderboard(){
+    try{
+      const q = query(collection(db, 'scores'), orderBy('score', 'desc'), limit(10));
+      const snap = await getDocs(q);
+      if (snap.empty){
+        boardStatus.textContent = "Aucun score enregistré pour l'instant. Sois le premier !";
+        return;
+      }
+      renderRows(snap.docs);
+    }catch(err){
+      console.error('Erreur de chargement du classement Firestore :', err);
+      boardStatus.textContent = "Classement momentanément indisponible.";
+    }
+  }
+
+  loadLeaderboard();
+</script>
 </body>
 </html>
