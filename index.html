@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AstroRécolte — par Multidevsn</title>
+<title>AstroRecolte — par Multidevsn</title>
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<!-- Google AdSense : remplace "ca-pub-XXXXXXXXXXXXXXXX" par ton ID éditeur une fois ton compte AdSense validé -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -60,11 +63,11 @@
   nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:68px; }
   .brand{ display:flex; align-items:center; gap:10px; font-weight:600; }
   .brand .mark{
-    width:30px; height:30px; border-radius:8px;
-    background:linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+    width:34px; height:34px; border-radius:9px; overflow:hidden; flex-shrink:0;
     display:flex; align-items:center; justify-content:center;
-    font-family:'Space Grotesk'; font-weight:700; color:#0a0d1f; font-size:15px;
+    box-shadow:0 0 0 1px var(--line);
   }
+  .brand .mark img{ width:100%; height:100%; display:block; object-fit:cover; }
   .brand .studio{ font-size:11px; color:var(--text-muted); font-weight:500; letter-spacing:0.04em; text-transform:uppercase; }
   nav ul{ display:flex; gap:32px; list-style:none; }
   nav ul a{ font-size:14px; color:var(--text-muted); transition:color .2s; }
@@ -199,8 +202,22 @@
   .support-card h3{ font-size:17px; font-weight:600; }
   .support-card p{ font-size:14px; color:var(--text-muted); }
   .ad-slot{
-    margin-top:6px; border:1px dashed rgba(237,235,247,0.18); border-radius:10px;
-    padding:16px; text-align:center; font-family:'JetBrains Mono'; font-size:11px; color:var(--text-muted);
+    margin-top:6px; position:relative; overflow:hidden; min-height:88px;
+    border:1px solid var(--line); border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,107,94,0.07) 0 10px, transparent 10px 20px),
+      linear-gradient(160deg, var(--bg-panel-2), #0d1130);
+  }
+  .ad-slot .ad-tag{
+    position:absolute; top:8px; right:9px;
+    font-family:'JetBrains Mono'; font-size:9px; font-weight:600; letter-spacing:0.08em;
+    color:var(--text-muted); background:rgba(255,255,255,0.06);
+    border:1px solid var(--line); border-radius:999px; padding:2px 7px;
+  }
+  .ad-slot .ad-word{
+    font-family:'JetBrains Mono'; font-weight:700; font-size:13px;
+    letter-spacing:0.24em; color:var(--text-muted); text-transform:uppercase;
   }
   .donate-btn{
     margin-top:6px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
@@ -226,6 +243,9 @@
   footer .flinks{ display:flex; gap:24px; font-size:13px; color:var(--text-muted); }
   footer .flinks a:hover{ color:var(--text-light); }
   footer .copy{ font-size:12px; color:var(--text-muted); width:100%; margin-top:18px; }
+  footer .legal-links{ display:block; margin-top:8px; }
+  footer .legal-links a{ color:var(--text-muted); }
+  footer .legal-links a:hover{ color:var(--text-light); }
 
   .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.in{ opacity:1; transform:translateY(0); }
@@ -243,9 +263,9 @@
 <nav>
   <div class="wrap">
     <div class="brand">
-      <div class="mark">AR</div>
+      <div class="mark"><img src="assets/logo.svg" alt="Logo AstroRecolte"></div>
       <div>
-        <div>AstroRécolte</div>
+        <div>AstroRecolte</div>
         <div class="studio">par Multidevsn</div>
       </div>
     </div>
@@ -264,7 +284,7 @@
     <div class="reveal in">
       <div class="eyebrow"><span class="dot"></span> Gratuit sur Android</div>
       <h1 class="headline">Esquive les météores.<br><span class="grad">Récolte les étoiles.</span></h1>
-      <p class="sub">AstroRécolte est un jeu d'arcade 2D rapide et nerveux : dirige ton vaisseau, attrape étoiles et cœurs, évite la pluie de météores, et grimpe dans le classement mondial.</p>
+      <p class="sub">AstroRecolte est un jeu d'arcade 2D rapide et nerveux : dirige ton vaisseau, attrape étoiles et cœurs, évite la pluie de météores, et grimpe dans le classement mondial.</p>
       <div class="cta-row">
         <a href="#telecharger" class="btn btn-primary">⬇ Télécharger l'APK</a>
         <a href="#comment-jouer" class="btn btn-ghost">Voir le gameplay</a>
@@ -278,7 +298,7 @@
     </div>
     <div class="reveal in">
       <div class="lane-frame">
-        <img class="shot-img" src="assets/gameplay1.png" alt="Capture d'écran d'AstroRécolte : le vaisseau esquive des météores et récolte des cristaux">
+        <img class="shot-img" src="assets/gameplay1.png" alt="Capture d'écran d'AstroRecolte : le vaisseau esquive des météores et récolte des cristaux">
       </div>
     </div>
   </div>
@@ -325,19 +345,19 @@
     <div class="section-head reveal">
       <div class="kicker">Aperçu</div>
       <h2>Un ciel qui ne laisse pas de répit</h2>
-      <p>Trois moments d'une partie d'AstroRécolte.</p>
+      <p>Trois moments d'une partie d'AstroRecolte.</p>
     </div>
     <div class="screens-grid">
       <div class="phone reveal">
-        <img class="shot-img" src="assets/gameplay1.png" alt="Pluie de météores et récolte de cristaux dans AstroRécolte">
+        <img class="shot-img" src="assets/gameplay1.png" alt="Pluie de météores et récolte de cristaux dans AstroRecolte">
         <div class="tag">Esquive et récolte</div>
       </div>
       <div class="phone reveal">
-        <img class="shot-img" src="assets/boss_fight.png" alt="Combat contre le boss Sentinelle Azur dans AstroRécolte">
+        <img class="shot-img" src="assets/boss_fight.png" alt="Combat contre le boss Sentinelle Azur dans AstroRecolte">
         <div class="tag">Boss — Sentinelle Azur</div>
       </div>
       <div class="phone reveal">
-        <img class="shot-img" src="assets/boutique.png" alt="Boutique de vaisseaux légendaires dans AstroRécolte">
+        <img class="shot-img" src="assets/boutique.png" alt="Boutique de vaisseaux légendaires dans AstroRecolte">
         <div class="tag">Boutique — vaisseaux légendaires</div>
       </div>
     </div>
@@ -368,14 +388,17 @@
     <div class="section-head reveal">
       <div class="kicker">Modèle économique</div>
       <h2>Gratuit, financé par la pub et les dons</h2>
-      <p>AstroRécolte reste 100% gratuit à l'installation. Le développement est soutenu par des publicités discrètes et des dons libres — jamais par des achats forcés.</p>
+      <p>AstroRecolte reste 100% gratuit à l'installation. Le développement est soutenu par des publicités discrètes et des dons libres — jamais par des achats forcés.</p>
     </div>
     <div class="support-grid">
       <div class="support-card ads reveal">
         <div class="icon">📺</div>
         <h3>Publicités intégrées</h3>
         <p>Bannière discrète en bas d'écran, et une pub courte entre certaines parties. Jamais pendant une récolte en cours.</p>
-        <div class="ad-slot">EMPLACEMENT PUBLICITAIRE — bannière AdMob / AdSense à connecter</div>
+        <div class="ad-slot">
+          <span class="ad-tag">AD</span>
+          <span class="ad-word">PUBLICITE</span>
+        </div>
       </div>
       <div class="support-card donate reveal">
         <div class="icon">💛</div>
@@ -390,7 +413,7 @@
 <section class="final" id="telecharger">
   <div class="wrap">
     <h2 class="reveal">Prêt à récolter le ciel ?</h2>
-    <p class="reveal">Télécharge AstroRécolte gratuitement sur Android et lance ta première partie en moins d'une minute.</p>
+    <p class="reveal">Télécharge AstroRecolte gratuitement sur Android et lance ta première partie en moins d'une minute.</p>
     <div class="cta-row reveal">
       <a href="https://mega.nz/file/LeITFCCI#HeOgxlCsSqlGla_6vCkjbg0Rs902ddAvyYmTMOnLSdg" target="_blank" rel="noopener" class="btn btn-primary">⬇ Télécharger l'APK (Android)</a>
       <a href="#" class="btn btn-ghost">Bientôt sur Google Play</a>
@@ -402,9 +425,9 @@
 <footer>
   <div class="wrap">
     <div class="brand">
-      <div class="mark">AR</div>
+      <div class="mark"><img src="assets/logo.svg" alt="Logo AstroRecolte"></div>
       <div>
-        <div>AstroRécolte</div>
+        <div>AstroRecolte</div>
         <div class="studio">par Multidevsn</div>
       </div>
     </div>
@@ -412,9 +435,12 @@
       <a href="#comment-jouer">Comment jouer</a>
       <a href="#classement">Classement</a>
       <a href="#soutenir">Soutenir</a>
-      <a href="#">Contact</a>
+      <a href="mailto:multidevsn@gmail.com">multidevsn@gmail.com</a>
     </div>
-    <div class="copy">© 2026 Multidevsn. AstroRécolte — jeu indépendant développé sous Godot 4.7.</div>
+    <div class="copy">
+      © 2026 Multidevsn. AstroRecolte — jeu indépendant développé sous Godot 4.7.
+      <span class="legal-links"><a href="terms.html">Conditions d'utilisation</a> · <a href="privacy.html">Politique de confidentialité</a></span>
+    </div>
   </div>
 </footer>
 

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politique de confidentialité — AstroRecolte</title>
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0a0d1f; --bg-panel:#141a37; --bg-panel-2:#1b2247;
+    --accent-gold:#f4c95d; --accent-coral:#ff6b5e; --accent-mint:#7fe7c4;
+    --text-light:#edebf7; --text-muted:#8b90b3; --line:rgba(237,235,247,0.09); --radius:14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(244,201,93,0.08), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(127,231,196,0.07), transparent 55%),
+      var(--bg-deep);
+    color:var(--text-light); font-family:'Inter', sans-serif; line-height:1.6;
+  }
+  h1,h2,.display{ font-family:'Space Grotesk', sans-serif; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+
+  nav{ position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); background:rgba(10,13,31,0.72); border-bottom:1px solid var(--line); }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:68px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:600; }
+  .brand .mark{ width:34px; height:34px; border-radius:9px; overflow:hidden; flex-shrink:0; box-shadow:0 0 0 1px var(--line); }
+  .brand .mark img{ width:100%; height:100%; display:block; object-fit:cover; }
+  .brand .studio{ font-size:11px; color:var(--text-muted); font-weight:500; letter-spacing:0.04em; text-transform:uppercase; }
+  .back-link{ font-size:13.5px; color:var(--text-muted); display:flex; align-items:center; gap:6px; transition:color .2s; }
+  .back-link:hover{ color:var(--text-light); }
+
+  main{ padding:64px 0 100px; }
+  .legal{ max-width:720px; margin:0 auto; }
+  .kicker{ font-size:12.5px; color:var(--accent-gold); font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; }
+  .legal h1{ font-size:clamp(28px,4vw,40px); font-weight:700; }
+  .updated{ margin-top:12px; font-size:13px; color:var(--text-muted); font-family:'JetBrains Mono'; }
+  .lede{ margin-top:24px; font-size:16px; color:var(--text-muted); }
+  .legal section{ margin-top:38px; }
+  .legal h2{ font-size:19px; font-weight:600; margin-bottom:10px; display:flex; align-items:baseline; gap:10px; }
+  .legal h2 .n{ font-family:'JetBrains Mono'; font-size:13px; color:var(--accent-mint); }
+  .legal p{ font-size:15px; color:var(--text-muted); }
+  .legal p + p{ margin-top:10px; }
+  .legal a.inline{ color:var(--accent-mint); border-bottom:1px solid rgba(127,231,196,0.3); }
+  .legal a.inline:hover{ color:var(--text-light); }
+  .note{
+    margin-top:38px; padding:18px 20px; border-radius:10px;
+    background:rgba(244,201,93,0.06); border:1px solid rgba(244,201,93,0.2);
+    font-size:13.5px; color:var(--text-muted);
+  }
+
+  footer{ border-top:1px solid var(--line); padding:40px 0; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  footer .flinks{ display:flex; gap:24px; font-size:13px; color:var(--text-muted); }
+  footer .flinks a:hover{ color:var(--text-light); }
+  footer .copy{ font-size:12px; color:var(--text-muted); width:100%; margin-top:18px; }
+  footer .legal-links{ display:block; margin-top:8px; }
+  footer .legal-links a{ color:var(--text-muted); }
+  footer .legal-links a:hover{ color:var(--text-light); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark"><img src="assets/logo.svg" alt="Logo AstroRecolte"></div>
+      <div>
+        <div>AstroRecolte</div>
+        <div class="studio">par Multidevsn</div>
+      </div>
+    </div>
+    <a href="index.html" class="back-link">← Retour au site</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <div class="legal">
+      <div class="kicker">Document légal</div>
+      <h1>Politique de confidentialité</h1>
+      <div class="updated">Dernière mise à jour : 8 août 2026</div>
+      <p class="lede">Cette politique explique quelles données sont traitées lorsque tu utilises AstroRecolte et ce site, édités par Multidevsn, développeur indépendant.</p>
+
+      <section>
+        <h2><span class="n">01</span> Responsable</h2>
+        <p>Multidevsn, développeur indépendant. Contact : <a class="inline" href="mailto:multidevsn@gmail.com">multidevsn@gmail.com</a></p>
+      </section>
+
+      <section>
+        <h2><span class="n">02</span> Données du classement en ligne</h2>
+        <p>Si tu choisis de participer au classement mondial, les données suivantes sont envoyées et stockées : le pseudo que tu choisis toi-même, ton score, et ton ratio points/seconde. Aucune donnée d'identification précise (nom réel, email, localisation) n'est demandée pour jouer ou pour apparaître au classement.</p>
+      </section>
+
+      <section>
+        <h2><span class="n">03</span> Hébergement des données</h2>
+        <p>Les scores du classement sont stockés via Firebase Firestore (Google Cloud). L'utilisation de ce service implique un transfert de données techniques (adresse IP, requêtes) vers l'infrastructure de Google, encadré par la politique de confidentialité de Google.</p>
+      </section>
+
+      <section>
+        <h2><span class="n">04</span> Publicité et cookies</h2>
+        <p>Ce site et le jeu peuvent afficher des publicités via Google AdSense / AdMob. Ces services peuvent utiliser des cookies ou identifiants publicitaires pour proposer des publicités, y compris personnalisées selon tes réglages. Pour en savoir plus ou gérer tes préférences, consulte la politique de confidentialité et publicité de Google.</p>
+      </section>
+
+      <section>
+        <h2><span class="n">05</span> Dons</h2>
+        <p>Les dons sont traités directement par PayPal. Multidevsn ne reçoit et ne stocke aucune donnée bancaire : ces informations restent gérées par PayPal, selon sa propre politique de confidentialité.</p>
+      </section>
+
+      <section>
+        <h2><span class="n">06</span> Téléchargement de l'APK</h2>
+        <p>Le fichier APK du jeu est hébergé sur Mega.nz, un service tiers. Le téléchargement depuis ce service est soumis aux conditions et à la politique de confidentialité de Mega.</p>
+      </section>
+
+      <section>
+        <h2><span class="n">07</span> Tes droits</h2>
+        <p>Tu peux demander la suppression de ton entrée dans le classement (pseudo + score) à tout moment en écrivant à <a class="inline" href="mailto:multidevsn@gmail.com">multidevsn@gmail.com</a>, en précisant le pseudo concerné.</p>
+      </section>
+
+      <section>
+        <h2><span class="n">08</span> Mineurs</h2>
+        <p>AstroRecolte n'est pas spécifiquement destiné aux enfants. Si tu es parent ou tuteur et que tu penses qu'un mineur a communiqué des informations via le classement, contacte-nous pour en demander la suppression.</p>
+      </section>
+
+      <section>
+        <h2><span class="n">09</span> Modifications</h2>
+        <p>Cette politique peut être mise à jour ; la date de dernière mise à jour figure en haut de cette page.</p>
+      </section>
+
+      <section>
+        <h2><span class="n">10</span> Contact</h2>
+        <p>Pour toute question relative à cette politique : <a class="inline" href="mailto:multidevsn@gmail.com">multidevsn@gmail.com</a></p>
+      </section>
+
+      <div class="note">Ce document est un modèle fourni à titre indicatif et ne constitue pas un conseil juridique. Adapte-le si besoin à ta situation et à ta juridiction (mentions RGPD, bandeau de consentement aux cookies, etc.).</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark"><img src="assets/logo.svg" alt="Logo AstroRecolte"></div>
+      <div>
+        <div>AstroRecolte</div>
+        <div class="studio">par Multidevsn</div>
+      </div>
+    </div>
+    <div class="flinks">
+      <a href="index.html#comment-jouer">Comment jouer</a>
+      <a href="index.html#classement">Classement</a>
+      <a href="index.html#soutenir">Soutenir</a>
+      <a href="mailto:multidevsn@gmail.com">multidevsn@gmail.com</a>
+    </div>
+    <div class="copy">
+      © 2026 Multidevsn. AstroRecolte — jeu indépendant développé sous Godot 4.7.
+      <span class="legal-links"><a href="terms.html">Conditions d'utilisation</a> · <a href="privacy.html">Politique de confidentialité</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
