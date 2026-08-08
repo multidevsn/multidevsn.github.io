@@ -176,6 +176,7 @@
   .board-row.head{ background:rgba(255,255,255,0.02); color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.05em; font-family:'JetBrains Mono'; }
   .board-row .rank{ font-family:'JetBrains Mono'; color:var(--accent-gold); font-weight:700; }
   .board-row .score{ font-family:'JetBrains Mono'; text-align:right; color:var(--accent-mint); }
+  .board-row .ratio{ font-family:'JetBrains Mono'; font-size:11.5px; color:var(--text-muted); }
   .board-row.top .rank{ color:var(--accent-coral); }
   .board-empty{ padding:32px 22px; text-align:center; font-size:14px; color:var(--text-muted); }
 
@@ -457,16 +458,17 @@
       const rank = String(i + 1).padStart(2, '0');
       const name = d.pseudo || docSnap.id;
       const score = (typeof d.score === 'number') ? d.score.toLocaleString('fr-FR') : d.score;
+      const ratio = (typeof d.ratio === 'number') ? d.ratio.toFixed(2) + ' pts/s' : '';
       const row = document.createElement('div');
       row.className = 'board-row' + (i < 3 ? ' top' : '');
-      row.innerHTML = `<span class="rank">${rank}</span><span>${name}</span><span class="score">${score}</span>`;
+      row.innerHTML = `<span class="rank">${rank}</span><span>${name}${ratio ? ` <span class="ratio">· ${ratio}</span>` : ''}</span><span class="score">${score}</span>`;
       boardBody.appendChild(row);
     });
   }
 
   async function loadLeaderboard(){
     try{
-      const q = query(collection(db, 'scores'), orderBy('score', 'desc'), limit(10));
+      const q = query(collection(db, 'scores'), orderBy('ratio', 'desc'), limit(10));
       const snap = await getDocs(q);
       if (snap.empty){
         boardStatus.textContent = "Aucun score enregistré pour l'instant. Sois le premier !";
