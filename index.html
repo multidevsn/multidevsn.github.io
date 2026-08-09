@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AstroRecolte — jeu d'arcade Android gratuit. Esquive les météores, récolte les étoiles et grimpe au classement mondial.">
 <title>AstroRecolte — par Multidevsn</title>
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
 <!-- Google AdSense : remplace "ca-pub-XXXXXXXXXXXXXXXX" par ton ID éditeur une fois ton compte AdSense validé -->
@@ -13,6 +14,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- Preload LCP image to improve Largest Contentful Paint -->
+<link rel="preload" as="image" href="assets/gameplay1.png">
+
 <style>
   :root{
     --bg-deep:#0a0d1f;
@@ -287,7 +292,7 @@
     <div class="reveal in">
       <div class="eyebrow"><span class="dot"></span> Gratuit sur Android</div>
       <h1 class="headline">Esquive les météores.<br><span class="grad">Récolte les étoiles.</span></h1>
-      <p class="sub">AstroRecolte est un jeu d'arcade 2D rapide et nerveux : dirige ton vaisseau, attrape étoiles et cœurs, évite la pluie de météores, et grimpe dans le classement mondial.</p>
+      <p class="sub">AstroRecolte est un jeu d'arcade 2D rapide et nerveux : dirige ton vaisseau, attrape étoiles et cœurs, évite la pluie de météores, et grimpe dans le classement mondial.<[...]
       <div class="cta-row">
         <a href="#telecharger" class="btn btn-primary">⬇ Télécharger l'APK</a>
         <a href="#comment-jouer" class="btn btn-ghost">Voir le gameplay</a>
@@ -301,7 +306,7 @@
     </div>
     <div class="reveal in">
       <div class="lane-frame">
-        <img class="shot-img" src="assets/gameplay1.png" alt="Capture d'écran d'AstroRecolte : le vaisseau esquive des météores et récolte des cristaux">
+        <img class="shot-img" src="assets/gameplay1.png" alt="Capture d'écran d'AstroRecolte : le vaisseau esquive des météores et récolte des cristaux" width="1200" height="675" loading="eager">
       </div>
     </div>
   </div>
@@ -352,15 +357,15 @@
     </div>
     <div class="screens-grid">
       <div class="phone reveal">
-        <img class="shot-img" src="assets/gameplay1.png" alt="Pluie de météores et récolte de cristaux dans AstroRecolte">
+        <img class="shot-img" src="assets/gameplay1.png" alt="Pluie de météores et récolte de cristaux dans AstroRecolte" width="1200" height="675" loading="lazy">
         <div class="tag">Esquive et récolte</div>
       </div>
       <div class="phone reveal">
-        <img class="shot-img" src="assets/boss_fight.png" alt="Combat contre le boss Sentinelle Azur dans AstroRecolte">
+        <img class="shot-img" src="assets/boss_fight.png" alt="Combat contre le boss Sentinelle Azur dans AstroRecolte" width="1200" height="675" loading="lazy">
         <div class="tag">Boss — Sentinelle Azur</div>
       </div>
       <div class="phone reveal">
-        <img class="shot-img" src="assets/boutique.png" alt="Boutique de vaisseaux légendaires dans AstroRecolte">
+        <img class="shot-img" src="assets/boutique.png" alt="Boutique de vaisseaux légendaires dans AstroRecolte" width="1200" height="675" loading="lazy">
         <div class="tag">Boutique — vaisseaux légendaires</div>
       </div>
     </div>
