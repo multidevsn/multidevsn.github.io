@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://multidevsn.github.io/sitemap.xml
