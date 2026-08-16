@@ -1,0 +1,8 @@
+{
+  "latest_version": "1.9.0",
+  "latest_code": 10,
+  "download_url": "https://multidevsn.github.io/astrorecolte/download",
+  "changelog": {
+    "fr": "Nouveautés v1.9.0 :\n• Notification de mise à jour intégrée\n• Vérification automatique via multidevsn.github.io\n• Bouton 'Vérifier les mises à jour' dans Paramètres",
+    "en": "What's new in v1.9.0:\n• In-app update notifications\n• Automatic check via multidevsn.github.io\n• 'Check for updates' button in Settings"
+
