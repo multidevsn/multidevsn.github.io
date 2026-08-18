@@ -1,8 +1,8 @@
 {
-  "latest_version": "1.9.0",
-  "latest_code": 10,
-  "download_url": "https://multidevsn.github.io/astrorecolte/download",
-  "changelog": {
-    "fr": "Nouveautés v1.9.0 :\n• Notification de mise à jour intégrée\n• Vérification automatique via multidevsn.github.io\n• Bouton 'Vérifier les mises à jour' dans Paramètres",
-    "en": "What's new in v1.9.0:\n• In-app update notifications\n• Automatic check via multidevsn.github.io\n• 'Check for updates' button in Settings"
-
+  "latest_version": "1.18.0",
+  "latest_code": 19,
+  "download_url": "https://dub.sh/uSI78jH",
+  "fr": "Nouveautés v1.18.0 :\n• Publicités récompensées désormais sur PC et autres appareils (pub ouverte dans le navigateur, 15 s de visionnage minimum)\n• Pubs dynamiques : rotation des zones Adsterra + cache-buster à chaque affichage\n• Plus de pubs : bannière pendant la partie et interstitiel tous les 3 secteurs + sur l'écran de fin (Android)\n• Correction des boutons pause et paramètres sur mobile (l'écran menu bloquait les taps du HUD)",
+  "en": "What's new in v1.18.0:\n• Rewarded ads now work on PC and other devices (ad opens in the browser, 15 s minimum watch time)\n• Dynamic ads: Adsterra zone rotation + cache-buster on every request\n• More ads: in-game banner and interstitial every 3 sectors + on game over (Android)\n• Fixed the pause and settings buttons on mobile (the menu screen was swallowing HUD taps)"
+  }
+}
